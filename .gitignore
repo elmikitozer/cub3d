@@ -1,0 +1,10 @@
+*.a
+*.o
+*.txt
+*.out
+*.pdf
+*.tmp
+/PIPEX*
+libft.soj
+tmp*
+.vscode/settings.json
