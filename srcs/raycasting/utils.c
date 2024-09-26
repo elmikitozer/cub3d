@@ -6,11 +6,11 @@
 /*   By: myevou <myevou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:44:38 by myevou            #+#    #+#             */
-/*   Updated: 2024/09/23 14:07:01 by myevou           ###   ########.fr       */
+/*   Updated: 2024/09/26 12:27:27 by myevou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube.h"
+#include "cub3d.h"
 
 void	steps_and_side_dist(t_cub *cub, t_ray *ray)
 {
@@ -54,7 +54,7 @@ void	dda_alg(t_cub *cub, t_ray *ray)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (game->map.grid[ray->mapX][ray->mapY] > 0)
+		if (cub->map.grid[ray->map_x][ray->map_y] > 0)
 			ray->hit = 1;
 		// OU CA ? if (cub->map.grid[ray->map_y][ray->map_x] == 1)
 		// 	ray->hit = 1;

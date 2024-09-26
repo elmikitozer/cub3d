@@ -6,29 +6,29 @@
 /*   By: myevou <myevou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 13:22:26 by myevou            #+#    #+#             */
-/*   Updated: 2024/09/23 14:17:01 by myevou           ###   ########.fr       */
+/*   Updated: 2024/09/26 14:14:44 by myevou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 // colors are red, green, blue and white
-static int	get_wall_color(t_cub *cub, t_ray *ray)
-{
-	int	color;
+// static int	get_wall_color(t_cub *cub, t_ray *ray)
+// {
+// 	int	color;
 
-	if (cub->map.grid[ray->map_x][ray->map_y] == 1)
-		color = 0xFF0000;
-	if (cub->map.grid[ray->map_x][ray->map_y] == 1)
-		color = 0x00FF00;
-	if (cub->map.grid[ray->map_x][ray->map_y] == 1)
-		color = 0x0000FF;
-	else
-		color = 0xFFFFFF;
-	if (ray->side == 1)
-		color = color / 2;
-	return (color);
-}
+// 	if (cub->map.grid[ray->map_x][ray->map_y] == 1)
+// 		color = 0xFF0000;
+// 	if (cub->map.grid[ray->map_x][ray->map_y] == 1)
+// 		color = 0x00FF00;
+// 	if (cub->map.grid[ray->map_x][ray->map_y] == 1)
+// 		color = 0x0000FF;
+// 	else
+// 		color = 0xFFFFFF;
+// 	if (ray->side == 1)
+// 		color = color / 2;
+// 	return (color);
+// }
 
 // static void draw_line(t_cub *cub, int x, t_ray *ray, int color)
 // {
@@ -53,6 +53,11 @@ void	load_texture(t_cub *cub, t_texture *texture, char *path)
 	}
 	texture->data = mlx_get_data_addr(texture->img_ptr, &texture->bpp,
 			&texture->size_line, &texture->endian);
+	if (!texture->img_ptr || !texture->data)
+	{
+		printf("Erreur lors du chargement de la texture\n");
+		exit(1);
+	}
 }
 
 // void	draw_wall(t_cub *cub, t_ray *ray, int x)
@@ -102,8 +107,6 @@ static void	select_texture(t_ray *ray)
 	// 		ray->tex_num = 3;
 	// }
 }
-
-
 
 static void	wall_x(t_cub *cub, t_ray *ray)
 {
@@ -164,12 +167,13 @@ static void	draw_textured_line(t_cub *cub, t_ray *ray, int x)
 		color = get_texture_color(&tex, ray->tex_x, texY);
 		if (ray->side == 1)
 			color = (color >> 1) & 8355711; // Assombrir pour les murs sur Y
+		// printf("Pixel Color at (%d, %d): %#X\n", x, y, color);
 		put_pixel_to_image(cub, x, y, color);
 		y++;
 	}
 }
 
-void	draw_wall(t_cub *cub, int x, t_ray *ray, int color)
+void	draw_wall(t_cub *cub, t_ray *ray, int x)
 {
 	select_texture(ray);
 	wall_x(cub, ray);

@@ -6,7 +6,7 @@
 /*   By: myevou <myevou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:16:34 by myevou            #+#    #+#             */
-/*   Updated: 2024/09/23 13:57:15 by myevou           ###   ########.fr       */
+/*   Updated: 2024/09/26 14:30:29 by myevou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	init_cub(t_cub *cub)
 
 void	init_player(t_cub *cub)
 {
-	cub->player.x = 22.0;
-	cub->player.y = 12.0;
+	cub->player.x = 7.0;
+	cub->player.y = 7.0;
 	cub->player.dir_x = -1.0;   // Initial direction: doit changer
 	cub->player.dir_y = 0.0;    // en fonction du N, S, E, W
 	cub->player.plane_x = 0.0;  // plan cam perpendiculaire à dir
@@ -55,8 +55,10 @@ void	init_ray(t_cub *cub, t_ray *ray, int x)
 		// position initiale de la grille (map_x,
 			//map_y) (en convertissant la pos du joueur on sait dans quelle case de la grille il est)
 	ray->delta_dist_x = fabs(1 / ray->ray_dir_x);
+	// ray->delta_dist_x = ray->ray_dir_x == 0 ? 1e30 : fabs(1 / ray->ray_dir_x);
 		// length of ray from one x or y-side to next x or y-side
 	ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
+	// ray->delta_dist_y = ray->ray_dir_y == 0 ? 1e30 : fabs(1 / ray->ray_dir_y);
 		// length of ray from one x or y-side to next x or y-side
 	ray->hit = 0;
 		// hit a wall
@@ -74,5 +76,6 @@ void	init(t_cub *cub)
 {
 	init_cub(cub);
 	init_player(cub);
+	init_map(cub);
 	init_textures(cub);
 }

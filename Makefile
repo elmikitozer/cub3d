@@ -5,16 +5,17 @@
 #                                                     +:+ +:+         +:+      #
 #    By: myevou <myevou@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/05/22 15:04:16 by gchenot           #+#    #+#              #
-#    Updated: 2024/09/06 17:03:08 by myevou           ###   ########.fr        #
+#    Created: 2024/09/26 11:49:51 by myevou            #+#    #+#              #
+#    Updated: 2024/09/26 13:38:30 by myevou           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 # **************************************************************************** #
 #                                   PROGRAM                                    #
 # **************************************************************************** #
 
-NAME			= minishell
+NAME			= cub3d
 
 # **************************************************************************** #
 #                                   COMPILER                                   #
@@ -45,69 +46,20 @@ CFLAGS		  += -I$(INC_PATH)
 SRCS			= $(addsuffix .c, \
 				main )
 
-# BUILTINS
-SRCS			+= $(addprefix builtins/, $(addsuffix .c, \
-				builtin \
-				cd/cd \
-				cd/cd_utils \
-				echo/echo \
-				env/env \
-				exit/exit \
-				export/export \
-				pwd/pwd \
-				unset/unset))
+# SRCS / MOVES
+SRCS			+= $(addprefix srcs/moves/, $(addsuffix .c, \
+				moves ))
 
-# SRCS / EXEC
-SRCS			+= $(addprefix srcs/execution/, $(addsuffix .c, \
-				execredir \
-				execution \
-				utils \
-				utils2))
+# SRCS / MOVES
+SRCS			+= $(addprefix srcs/map/, $(addsuffix .c, \
+				map ))
 
-# SRCS / EXPAND
-SRCS			+= $(addprefix srcs/expand/, $(addsuffix .c, \
-				expand \
-				len \
-				utils \
-				utils2 ))
-
-# SRCS / INIT
-SRCS			+= $(addprefix srcs/init/, $(addsuffix .c, \
+# SRCS / RAYCASTING
+SRCS			+= $(addprefix srcs/raycasting/, $(addsuffix .c, \
+				draw \
 				init \
-				parsing))
-
-# SRCS / PIPESPLITNG
-SRCS			+= $(addprefix srcs/pipespliting/, $(addsuffix .c, \
-				splitsep \
-				utils))
-
-# SRCS / REDIR
-SRCS			+= $(addprefix srcs/redirection/, $(addsuffix .c, \
-				redir \
-				utils))
-
-# HEREDOCS
-SRCS			+= $(addprefix srcs/heredoc/, $(addsuffix .c, \
-				newheredoc \
-				utils))
-
-# SIGNALS
-SRCS			+= $(addprefix signals/, $(addsuffix .c, \
-				signal\
-				handler_ctrlc))
-
-# SRCS/UTILS
-SRCS			+= $(addprefix srcs/utils/, $(addsuffix .c, \
-				arrays \
-				errors \
-				exit \
-				free))
-
-# SRCS/UTILS/ENV
-SRCS			+= $(addprefix srcs/utils/env/, $(addsuffix .c, \
-				find_env_var \
-				get_var_info \
-				update_env_list))
+				raycasting \
+				utils ))
 
 OBJS			= $(SRCS:%.c=$(OBJ_PATH)/%.o)
 
@@ -117,7 +69,7 @@ DEPS			= $(OBJS:.o=.d)
 #                                     LIBS                                     #
 # **************************************************************************** #
 
-LDLIBS			=	-lft
+LDLIBS			=	-lft -lmlx_Linux -lXext -lX11 -lm -lz
 
 # OS
 OS				=	$(shell uname)
@@ -130,19 +82,19 @@ INCL_RDL_LIB    =   -L/Users/$(USER)/.linuxbrew/opt/readline/lib -lncurses
 INCL_RDL_HEADER =   -I/Users/$(USER)/.linuxbrew/opt/readline/include
 endif
 
-#  export LDFLAGS="-L/usr/local/opt/ncurses/lib"
-#   export CPPFLAGS="-I/usr/local/opt/ncurses/include"
-
-LDLIBS		  += -lreadline $(INCL_RDL_LIB)
-
 # LIBFT
 LIBFT_DIR		= libft
 LIBFT_INC_PATH	= $(LIBFT_DIR)/includes
 LIBFT			= $(LIBFT_DIR)/libft.a
 
-CFLAGS		  += -I$(LIBFT_INC_PATH)
+# MINILIBX
+MLX_DIR			= minilibx-linux
+MLX_INC_PATH	= $(MLX_DIR)
+MLX				= $(MLX_DIR)/libmlx_Linux.a
 
-LDLIBS		  += -L$(LIBFT_DIR)
+CFLAGS			+= -I$(LIBFT_INC_PATH) -I$(MLX_INC_PATH)
+
+LDLIBS			+= -L$(LIBFT_DIR) -L$(MLX_DIR)
 
 # **************************************************************************** #
 #                                    RULES                                     #
@@ -150,12 +102,16 @@ LDLIBS		  += -L$(LIBFT_DIR)
 
 all:			$(NAME)
 
-$(NAME):		${OBJ_PATH} $(OBJS) $(LIBFT)
+$(NAME):		${OBJ_PATH} $(OBJS) $(LIBFT) $(MLX)
+				@cd minilibx-linux && $(MAKE)
 				@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LDLIBS) $(LIBFT)
 				@echo "\n${GREEN}> $(NAME) was successfully compiled 🎉${END}"
 
 $(LIBFT):
 				@make -C $(LIBFT_DIR)
+
+$(MLX):
+				@make -C $(MLX_DIR)
 
 $(OBJ_PATH):
 				@mkdir -p ${OBJ_PATH}

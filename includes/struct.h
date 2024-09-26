@@ -6,7 +6,7 @@
 /*   By: myevou <myevou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:36:31 by myevou            #+#    #+#             */
-/*   Updated: 2024/09/23 13:59:27 by myevou           ###   ########.fr       */
+/*   Updated: 2024/09/26 12:21:44 by myevou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,10 @@ typedef struct s_cub
 {
 	void		*mlx;
 	void		*win;
+	void		*img_ptr;
 	int			screen_width;
 	int			screen_height;
 	char		*img_data;
-	void		*img_ptr;
 	int			bpp;
 	int			size_line;
 	int			endian;

@@ -5,6 +5,8 @@
 *.pdf
 *.tmp
 /PIPEX*
-libft.soj
+libft.so
+/libft
 tmp*
 .vscode/settings.json
+/minilibx-linux
