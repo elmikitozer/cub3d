@@ -6,7 +6,7 @@
 #    By: myevou <myevou@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/26 11:49:51 by myevou            #+#    #+#              #
-#    Updated: 2024/09/26 13:38:30 by myevou           ###   ########.fr        #
+#    Updated: 2024/09/27 11:10:22 by myevou           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,9 +48,10 @@ SRCS			= $(addsuffix .c, \
 
 # SRCS / MOVES
 SRCS			+= $(addprefix srcs/moves/, $(addsuffix .c, \
-				moves ))
+				moves\
+				keys ))
 
-# SRCS / MOVES
+# SRCS / MAP
 SRCS			+= $(addprefix srcs/map/, $(addsuffix .c, \
 				map ))
 

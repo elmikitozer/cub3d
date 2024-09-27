@@ -6,7 +6,7 @@
 /*   By: myevou <myevou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:26:41 by myevou            #+#    #+#             */
-/*   Updated: 2024/09/26 14:14:40 by myevou           ###   ########.fr       */
+/*   Updated: 2024/09/27 11:51:13 by myevou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ static void clear_image(t_cub *cub)
 
 int	rc_loop(t_cub *cub)
 {
+	handle_movement(cub);
 	clear_image(cub);
+	draw_ceiling_and_floor(cub);
 	raycasting(cub);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img_ptr, 0, 0);
 	return (0);

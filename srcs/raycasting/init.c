@@ -6,7 +6,7 @@
 /*   By: myevou <myevou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:16:34 by myevou            #+#    #+#             */
-/*   Updated: 2024/09/26 14:30:29 by myevou           ###   ########.fr       */
+/*   Updated: 2024/09/27 11:35:38 by myevou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	init_cub(t_cub *cub)
 			&cub->size_line, &cub->endian);
 }
 
-void	init_player(t_cub *cub)
+void	init_player_keys(t_cub *cub)
 {
 	cub->player.x = 7.0;
 	cub->player.y = 7.0;
@@ -38,6 +38,14 @@ void	init_player(t_cub *cub)
 	cub->player.dir_y = 0.0;    // en fonction du N, S, E, W
 	cub->player.plane_x = 0.0;  // plan cam perpendiculaire à dir
 	cub->player.plane_y = 0.66; // FOV a 66°
+	cub->player.move_speed = 0.05;
+	cub->player.rot_speed = 0.05;
+	cub->keys.w = 0;
+	cub->keys.s = 0;
+	cub->keys.a = 0;
+	cub->keys.d = 0;
+	cub->keys.left = 0;
+	cub->keys.right = 0;
 }
 
 void	init_ray(t_cub *cub, t_ray *ray, int x)
@@ -70,12 +78,14 @@ void	init_textures(t_cub *cub)
 	load_texture(cub, &cub->texture[1], "textures/south.xpm"); // Texture Sud
 	load_texture(cub, &cub->texture[2], "textures/east.xpm");  // Texture Est
 	load_texture(cub, &cub->texture[3], "textures/west.xpm");  // Texture Ouest
+	cub->floor_color = 0x8B4513;
+	cub->ceiling_color = 0x87CEEBC;
 }
 
 void	init(t_cub *cub)
 {
 	init_cub(cub);
-	init_player(cub);
+	init_player_keys(cub);
 	init_map(cub);
 	init_textures(cub);
 }

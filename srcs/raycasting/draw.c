@@ -6,7 +6,7 @@
 /*   By: myevou <myevou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 13:22:26 by myevou            #+#    #+#             */
-/*   Updated: 2024/09/26 14:14:44 by myevou           ###   ########.fr       */
+/*   Updated: 2024/09/27 11:54:03 by myevou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ static void	draw_textured_line(t_cub *cub, t_ray *ray, int x)
 	y = ray->draw_start;
 	while (y < ray->draw_end)
 	{
-		texY = (int)texPos & (tex.height - 1);
+		texY = (int)texPos % (tex.height - 1);
 		texPos += step;
 		color = get_texture_color(&tex, ray->tex_x, texY);
 		if (ray->side == 1)
@@ -179,4 +179,27 @@ void	draw_wall(t_cub *cub, t_ray *ray, int x)
 	wall_x(cub, ray);
 	tex_x(cub, ray);
 	draw_textured_line(cub, ray, x);
+}
+
+void	draw_ceiling_and_floor(t_cub *cub)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < cub->screen_height / 2)
+	{
+		x = 0;
+		while (x < cub->screen_width)
+			put_pixel_to_image(cub, x++, y, cub->ceiling_color);
+		y++;
+	}
+	y = cub->screen_height / 2;
+	while (y < cub->screen_height)
+	{
+		x = 0;
+		while (x < cub->screen_width)
+			put_pixel_to_image(cub, x++, y, cub->floor_color);
+		y++;
+	}
 }

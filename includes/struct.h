@@ -6,7 +6,7 @@
 /*   By: myevou <myevou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:36:31 by myevou            #+#    #+#             */
-/*   Updated: 2024/09/26 12:21:44 by myevou           ###   ########.fr       */
+/*   Updated: 2024/09/27 11:34:28 by myevou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,22 @@ typedef struct s_texture
 {
 	void		*img_ptr;
 	char		*data;
-	int 		width;
+	int			width;
 	int			height;
 	int			bpp;
 	int			size_line;
 	int			endian;
 }				t_texture;
+
+typedef struct s_keys
+{
+	int			w;
+	int			a;
+	int			s;
+	int			d;
+	int			left;
+	int			right;
+}				t_keys;
 
 typedef struct s_cub
 {
@@ -78,7 +88,10 @@ typedef struct s_cub
 	int			bpp;
 	int			size_line;
 	int			endian;
+	int			floor_color;
+	int			ceiling_color;
 	t_texture	texture[4];
+	t_keys		keys;
 	t_map		map;
 	t_player	player;
 }				t_cub;
