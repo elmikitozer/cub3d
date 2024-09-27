@@ -6,7 +6,7 @@
 /*   By: myevou <myevou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:16:34 by myevou            #+#    #+#             */
-/*   Updated: 2024/09/27 11:35:38 by myevou           ###   ########.fr       */
+/*   Updated: 2024/09/27 17:49:33 by myevou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,68 @@ void	init_cub(t_cub *cub)
 		printf("Erreur : Impossible de créer l'image principale\n");
 		exit(1);
 	}
-	cub->img_data = mlx_get_data_addr(cub->img_ptr, &cub->bpp,
-			&cub->size_line, &cub->endian);
+	cub->img_data = mlx_get_data_addr(cub->img_ptr, &cub->bpp, &cub->size_line,
+			&cub->endian);
+}
+
+static void	set_player_direction(t_cub *cub, int direction)
+{
+	// return ;
+	if (direction == 11)
+	{
+		cub->player.dir_x = 0;
+		cub->player.dir_y = -1; // Nord (regarde vers le haut)
+	}
+	else if (direction == 12)
+	{
+		cub->player.dir_x = 1;
+		cub->player.dir_y = 0; // Sud (regarde vers le bas)
+	}
+	else if (direction == 13)
+	{
+		cub->player.dir_x = -1;
+		cub->player.dir_y = 0; // Ouest (regarde vers la gauche)
+	}
+	else if (direction == 14)
+	{
+		cub->player.dir_x = 1;
+		cub->player.dir_y = 0; // Est (regarde vers la droite)
+	}
+}
+
+static void init_spawn(t_cub *cub, int **map, int width, int height)
+{
+	int x;
+	int y;
+
+	x = 0;
+	y = 0;
+	// (void)cub;
+	while (y < height)
+	{
+		x = 0;
+		while (x < width)
+		{
+			if (map[y][x] == 11 || map[y][x] == 12 || map[y][x] == 13 || map[y][x] == 14)
+			{
+				printf("test\n");
+				cub->player.x = x + 0.5;
+				cub->player.y = y + 0.5;
+				set_player_direction(cub, map[y][x]);
+				map[y][x] = 0;
+				return ;
+			}
+			x++;
+		}
+		y++;
+	}
 }
 
 void	init_player_keys(t_cub *cub)
 {
 	cub->player.x = 7.0;
 	cub->player.y = 7.0;
-	cub->player.dir_x = -1.0;   // Initial direction: doit changer
+	cub->player.dir_x = 1.0;   // Initial direction: doit changer
 	cub->player.dir_y = 0.0;    // en fonction du N, S, E, W
 	cub->player.plane_x = 0.0;  // plan cam perpendiculaire à dir
 	cub->player.plane_y = 0.66; // FOV a 66°
@@ -87,5 +140,8 @@ void	init(t_cub *cub)
 	init_cub(cub);
 	init_player_keys(cub);
 	init_map(cub);
+	printf("Player Direction: (%f, %f)\n", cub->player.dir_x, cub->player.dir_y);
+	init_spawn(cub, cub->map.grid, cub->map.width, cub->map.height);
+	printf("Player Direction: (%f, %f)\n", cub->player.dir_x, cub->player.dir_y);
 	init_textures(cub);
 }

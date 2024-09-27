@@ -6,7 +6,7 @@
 /*   By: myevou <myevou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 13:30:40 by myevou            #+#    #+#             */
-/*   Updated: 2024/09/26 14:28:42 by myevou           ###   ########.fr       */
+/*   Updated: 2024/09/27 17:46:04 by myevou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ static void	load_map_data(t_cub *cub)
 		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 1},
 		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -50,8 +50,8 @@ void	init_map(t_cub *cub)
 {
 	int	i;
 
-	cub->map.width = 24;  // Remplace par la largeur réelle de ta carte
-	cub->map.height = 24; // Remplace par la hauteur réelle de ta carte
+	cub->map.width = 14;  // Remplace par la largeur réelle de ta carte
+	cub->map.height = 14; // Remplace par la hauteur réelle de ta carte
 	// Allocation de la matrice 2D
 	cub->map.grid = (int **)malloc(sizeof(int *) * cub->map.height);
 	if (!cub->map.grid)
