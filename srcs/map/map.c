@@ -6,30 +6,28 @@
 /*   By: myevou <myevou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 13:30:40 by myevou            #+#    #+#             */
-/*   Updated: 2024/09/30 12:59:12 by myevou           ###   ########.fr       */
+/*   Updated: 2024/09/30 22:34:38 by myevou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	load_map_data(t_cub *cub)
+void	load_map_data(t_cub *cub)
 {
-	int	mapData[14][14] = {
-		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
-		};
+	// int	mapData[12][14] = {
+	// 	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+	// 	{1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+	// 	{1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+	// 	{1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+	// 	{1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+	// 	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+	// 	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+	// 	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+	// 	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+	// 	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+	// 	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+	// 	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+	// 	};
 	int	i;
 	int	j;
 
@@ -39,7 +37,7 @@ static void	load_map_data(t_cub *cub)
 		j = 0;
 		while (j < cub->map.width)
 		{
-			cub->map.grid[i][j] = mapData[i][j];
+			cub->map.grid[i][j] = cub->map.map_int[i][j];
 			j++;
 		}
 		i++;
@@ -50,20 +48,21 @@ void	init_map(t_cub *cub)
 {
 	int	i;
 
-	cub->map.width = 14;  // Remplace par la largeur réelle de ta carte
-	cub->map.height = 14; // Remplace par la hauteur réelle de ta carte
-	// Allocation de la matrice 2D
-	cub->map.grid = (int **)malloc(sizeof(int *) * cub->map.height);
+	cub->map.height = count_map_rgb(cub->map.map);  // Remplace par la largeur réelle de ta carte
+	cub->map.width = ft_strlen(cub->map.map[0]); // Remplace par la largeur réelle de ta carte
+	return ;
+	// // Allocation de la matrice 2D
+	cub->map.grid = (int **)malloc(sizeof(int *) * cub->map.height + 1);
 	if (!cub->map.grid)
-		exit(1);
+		exit_cub(cub);
 	i = 0;
-	while (i < cub->map.height)
+	while (i < cub->map.height + 1)
 	{
-		cub->map.grid[i] = (int *)malloc(sizeof(int) * cub->map.width);
+		cub->map.grid[i] = (int *)malloc(sizeof(int) * cub->map.width + 1);
 		if (!cub->map.grid[i])
-			exit(1);
+			exit_cub(cub);;
 		i++;
 	}
 	// Chargement des données de la carte
-	load_map_data(cub);
+	// load_map_data(cub);
 }

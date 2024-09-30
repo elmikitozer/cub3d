@@ -6,7 +6,7 @@
 /*   By: myevou <myevou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:15:05 by myevou            #+#    #+#             */
-/*   Updated: 2024/09/27 11:54:48 by myevou           ###   ########.fr       */
+/*   Updated: 2024/09/30 22:18:36 by myevou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,51 @@
 // 	}
 // }
 
+void	print_map_grid(t_map *cub)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	// printf("Map int:\n");
+	while (cub->map[i])
+	{
+		j = 0;
+		while (cub->map[i][j])
+			printf("%d ", cub->grid[i][j++]);
+		printf("\n");
+		i++;
+	}
+}
+
 int	main(int ac, char **av)
 {
 	t_cub	cub;
 
-	(void)ac;
-	(void)av;
 	// parsing(&cub, ac, av);
 	// init_map(&cub);
+	// init_cub(&cub);
+	// init_player_keys(&cub);
+	// init_cub(&cub);
+	// init_player_keys(&cub);
+	// init_map(&cub);
+	parsing(&cub, ac, av);
+	cub.map.grid = cub.map.map_int;
+	printf("\n");
+	print_map_grid(&cub.map);
 	init(&cub);
-	// print_map(&cub);
+	printf("Player Position: (%f, %f)\n", cub.player.x, cub.player.y);
+	print_map_grid(&cub.map);
+	// printf("cub.map.grid[12][3] = %d\n", cub.map.grid[12][3]);
 	// printf("Player Position: (%f, %f)\n", cub.player.x, cub.player.y);
+	// print_map_int(&cub);
+	// print_map(&cub);
 	// print_map(&cub);
 	// mlx_hook(cub.win, 2, 1L << 0, key_press, &cub);
 	mlx_hook(cub.win, 33, 1L << 17, exit_cub, &cub);
 	mlx_hook(cub.win, 2, 1L << 0, key_press, &cub);   // 2 pour KeyPress
 	mlx_hook(cub.win, 3, 1L << 1, key_release, &cub); // 3 pour KeyRelease
-	mlx_hook(cub.win, 6, 1L<<6, mouse_move, &cub); // 6 pour MotionNotify
+	mlx_hook(cub.win, 6, 1L << 6, mouse_move, &cub);  // 6 pour MotionNotify
 	// mlx_key_hook(cub.win, key_press, &cub);
 	mlx_loop_hook(cub.mlx, rc_loop, &cub);
 	mlx_loop(cub.mlx);

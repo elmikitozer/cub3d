@@ -6,7 +6,7 @@
 /*   By: myevou <myevou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 13:22:26 by myevou            #+#    #+#             */
-/*   Updated: 2024/09/27 11:54:03 by myevou           ###   ########.fr       */
+/*   Updated: 2024/09/30 22:45:53 by myevou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,15 @@ void	load_texture(t_cub *cub, t_texture *texture, char *path)
 			&texture->height);
 	if (!texture->img_ptr)
 	{
-		printf("Error\nTexture not found\n");
-		exit(1);
+		printf("Error\nTexture non trouvee\n");
+		exit_cub(cub);
 	}
 	texture->data = mlx_get_data_addr(texture->img_ptr, &texture->bpp,
 			&texture->size_line, &texture->endian);
 	if (!texture->img_ptr || !texture->data)
 	{
 		printf("Erreur lors du chargement de la texture\n");
-		exit(1);
+		exit_cub(cub);
 	}
 }
 
@@ -88,9 +88,9 @@ static void	select_texture(t_ray *ray)
 	else
 	{
 		if (ray->ray_dir_y > 0)
-			ray->tex_num = 1; // Sud
-		else
 			ray->tex_num = 0; // Nord
+		else
+			ray->tex_num = 1; // Sud
 	}
 	// SI PROBLEME AVEC LES TEXTURES COMME AUREL ET THOMAS ==>
 	// {

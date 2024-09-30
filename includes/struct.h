@@ -6,7 +6,7 @@
 /*   By: myevou <myevou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:36:31 by myevou            #+#    #+#             */
-/*   Updated: 2024/09/27 17:15:35 by myevou           ###   ########.fr       */
+/*   Updated: 2024/09/30 20:48:48 by myevou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ typedef struct s_player
 
 typedef struct s_map
 {
-	int		**grid;
+	int			**map_int;
+	char		**map;
+	char		**map_infos;
+	int			**grid;
 	int			width;
 	int			height;
 }				t_map;

@@ -6,7 +6,7 @@
 #    By: myevou <myevou@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/26 11:49:51 by myevou            #+#    #+#              #
-#    Updated: 2024/09/27 11:10:22 by myevou           ###   ########.fr        #
+#    Updated: 2024/09/30 20:12:41 by myevou           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,18 @@ SRCS			+= $(addprefix srcs/raycasting/, $(addsuffix .c, \
 				draw \
 				init \
 				raycasting \
+				utils ))
+
+# SRCS / PARISING
+SRCS			+= $(addprefix srcs/parsing/, $(addsuffix .c, \
+				error_handling \
+				map_check_utils \
+				map_check \
+				map_creat \
+				map_playable \
+				map_playable_utils \
+				map_split \
+				parsing \
 				utils ))
 
 OBJS			= $(SRCS:%.c=$(OBJ_PATH)/%.o)

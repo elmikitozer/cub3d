@@ -6,7 +6,7 @@
 /*   By: myevou <myevou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:16:34 by myevou            #+#    #+#             */
-/*   Updated: 2024/09/30 13:06:39 by myevou           ###   ########.fr       */
+/*   Updated: 2024/09/30 22:51:09 by myevou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	init_cub(t_cub *cub)
 	if (!cub->img_ptr)
 	{
 		printf("Erreur : Impossible de créer l'image principale\n");
-		exit(1);
+		exit_cub(cub);
 	}
 	cub->img_data = mlx_get_data_addr(cub->img_ptr, &cub->bpp, &cub->size_line,
 			&cub->endian);
@@ -53,14 +53,14 @@ static void	set_player_direction(t_cub *cub, int direction)
 		cub->player.dir_x = -1;
 		cub->player.dir_y = 0;
 		cub->player.plane_x = 0;
-		cub->player.plane_y = 0.66; // Ouest (regarde vers la gauche)
+		cub->player.plane_y = -0.66; // Ouest (regarde vers la gauche)
 	}
 	else if (direction == 14)
 	{
 		cub->player.dir_x = 1;
 		cub->player.dir_y = 0;
 		cub->player.plane_x = 0;
-		cub->player.plane_y = -0.66; // Est (regarde vers la droite)
+		cub->player.plane_y = 0.66; // Est (regarde vers la droite)
 	}
 }
 
@@ -79,8 +79,10 @@ static void init_spawn(t_cub *cub, int **map, int width, int height)
 		{
 			if (map[y][x] == 11 || map[y][x] == 12 || map[y][x] == 13 || map[y][x] == 14)
 			{
-				cub->player.x = y + 1.5;
-				cub->player.y = x + 1.5;
+				printf("map[y][x] = %d\n", map[y][x]);
+				printf("Player Spawn Position: (%d, %d)\n", y, x);
+				cub->player.x = y + 0.5;
+				cub->player.y = x + 0.5;
 				set_player_direction(cub, map[y][x]);
 				map[y][x] = 0;
 				return ;
@@ -135,12 +137,12 @@ void	init_ray(t_cub *cub, t_ray *ray, int x)
 
 void	init_textures(t_cub *cub)
 {
-	load_texture(cub, &cub->texture[0], "textures/west.xpm"); // Texture Nord
-	load_texture(cub, &cub->texture[1], "textures/east.xpm"); // Texture Sud
-	load_texture(cub, &cub->texture[2], "textures/north.xpm");  // Texture Est
-	load_texture(cub, &cub->texture[3], "textures/south.xpm");  // Texture Ouest
+	load_texture(cub, &cub->texture[0], "textures/north.xpm"); // Texture Nord
+	load_texture(cub, &cub->texture[1], "textures/south.xpm"); // Texture Sud
+	load_texture(cub, &cub->texture[2], "textures/west.xpm");  // Texture Est
+	load_texture(cub, &cub->texture[3], "textures/east.xpm");  // Texture Ouest
 	cub->floor_color = 0x8B4513;
-	cub->ceiling_color = 0x87CEEBC;
+	cub->ceiling_color = 0x7dff1a;
 }
 
 void	init(t_cub *cub)

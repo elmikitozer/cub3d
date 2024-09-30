@@ -6,7 +6,7 @@
 /*   By: myevou <myevou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:43:05 by myevou            #+#    #+#             */
-/*   Updated: 2024/09/27 16:49:50 by myevou           ###   ########.fr       */
+/*   Updated: 2024/09/30 20:40:44 by myevou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,14 @@ int exit_cub(t_cub *cub)
 		mlx_destroy_image(cub->mlx, cub->texture[2].img_ptr);
 	if (cub->texture[3].img_ptr)
 		mlx_destroy_image(cub->mlx, cub->texture[3].img_ptr);
-	if(cub->map.grid)
-	{
-		int i = -1;
-		while (++i < cub->map.height)
-			free(cub->map.grid[i]);
-		free(cub->map.grid);
-	}
+	free_map(&cub->map);
+	// if(cub->map.grid)
+	// {
+	// 	int i = -1;
+	// 	while (++i < cub->map.height)
+	// 		free(cub->map.grid[i]);
+	// 	free(cub->map.grid);
+	// }
 	mlx_destroy_image(cub->mlx, cub->img_ptr);
 	mlx_destroy_window(cub->mlx, cub->win);
 	mlx_destroy_display(cub->mlx);
