@@ -6,7 +6,7 @@
 /*   By: myevou <myevou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 14:13:24 by ellehmim          #+#    #+#             */
-/*   Updated: 2024/09/30 22:00:51 by myevou           ###   ########.fr       */
+/*   Updated: 2024/10/01 17:41:37 by myevou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	free_map(t_map *cub)
 	free_map2(cub->map);
 	free_map2(cub->map_infos);
 	free(cub->grid);
-	free(cub);
+	// free(cub);
 }
 
 void	free_map2(char **map)

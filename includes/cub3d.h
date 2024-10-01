@@ -6,7 +6,7 @@
 /*   By: myevou <myevou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:10:20 by myevou            #+#    #+#             */
-/*   Updated: 2024/09/30 21:54:31 by myevou           ###   ########.fr       */
+/*   Updated: 2024/10/01 16:44:17 by myevou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void	wall_distance(t_cub *cub, t_ray *ray);
 void	line_height(t_cub *cub, t_ray *ray);
 int		exit_cub(t_cub *cub);
 int		key_press(int keycode, t_cub *cub);
+void	print_map_grid(t_map *cub);
 
 // DRAW
 void	draw_wall(t_cub *cub, t_ray *ray, int x);

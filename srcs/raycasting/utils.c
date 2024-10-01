@@ -6,7 +6,7 @@
 /*   By: myevou <myevou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:44:38 by myevou            #+#    #+#             */
-/*   Updated: 2024/09/30 15:54:55 by myevou           ###   ########.fr       */
+/*   Updated: 2024/10/01 16:13:26 by myevou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ void	dda_alg(t_cub *cub, t_ray *ray)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		// if (cub->map.grid[ray->map_x][ray->map_y] > 0)
-			// ray->hit = 1;
-		if (cub->map.grid[ray->map_y][ray->map_x] == 1)
+		if (cub->map.grid[ray->map_x][ray->map_y] > 0)
 			ray->hit = 1;
+		// if (cub->map.grid[ray->map_y][ray->map_x] == 1)
+		// 	ray->hit = 1;
 	}
 }
 

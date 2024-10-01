@@ -6,7 +6,7 @@
 /*   By: myevou <myevou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 14:29:30 by myevou            #+#    #+#             */
-/*   Updated: 2024/09/30 22:45:00 by myevou           ###   ########.fr       */
+/*   Updated: 2024/10/01 17:25:49 by myevou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static void	move_forward(t_cub *cub)
 	moveSpeed = 0.01;
 	netX = (int)(cub->player.x + cub->player.dir_x * moveSpeed);
 	netY = (int)(cub->player.y + cub->player.dir_y * moveSpeed);
-	if (cub->map.grid[(int)cub->player.y][netX] == 0)
+	if (cub->map.grid[netX][(int)cub->player.y] == 0)
 		cub->player.x += cub->player.dir_x * moveSpeed;
-	if (cub->map.grid[netY][(int)cub->player.x] == 0)
+	if (cub->map.grid[(int)cub->player.x][netY] == 0)
 		cub->player.y += cub->player.dir_y * moveSpeed;
 }
 
@@ -36,9 +36,9 @@ static void	move_backward(t_cub *cub)
 	moveSpeed = 0.01;
 	netX = (int)(cub->player.x - cub->player.dir_x * moveSpeed);
 	netY = (int)(cub->player.y - cub->player.dir_y * moveSpeed);
-	if (cub->map.grid[(int)cub->player.y][netX] == 0)
+	if (cub->map.grid[netX][(int)cub->player.y] == 0)
 		cub->player.x -= cub->player.dir_x * moveSpeed;
-	if (cub->map.grid[netY][(int)cub->player.x] == 0)
+	if (cub->map.grid[(int)cub->player.x][netY] == 0)
 		cub->player.y -= cub->player.dir_y * moveSpeed;
 }
 

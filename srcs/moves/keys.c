@@ -6,7 +6,7 @@
 /*   By: myevou <myevou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 10:43:05 by myevou            #+#    #+#             */
-/*   Updated: 2024/09/30 20:40:44 by myevou           ###   ########.fr       */
+/*   Updated: 2024/10/01 17:23:58 by myevou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int exit_cub(t_cub *cub)
 	mlx_destroy_image(cub->mlx, cub->img_ptr);
 	mlx_destroy_window(cub->mlx, cub->win);
 	mlx_destroy_display(cub->mlx);
+	// free(cub->ma)
 	free(cub->mlx);
 	exit(0);
 }
