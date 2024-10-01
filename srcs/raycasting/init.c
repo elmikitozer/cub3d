@@ -6,7 +6,7 @@
 /*   By: myevou <myevou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:16:34 by myevou            #+#    #+#             */
-/*   Updated: 2024/10/01 17:44:31 by myevou           ###   ########.fr       */
+/*   Updated: 2024/10/01 18:09:53 by myevou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,10 +135,10 @@ void	init_ray(t_cub *cub, t_ray *ray, int x)
 
 void	init_textures(t_cub *cub)
 {
-	load_texture(cub, &cub->texture[0], "textures/east.xpm"); // Texture Nord
-	load_texture(cub, &cub->texture[1], "textures/west.xpm"); // Texture Sud
-	load_texture(cub, &cub->texture[2], "textures/north.xpm");  // Texture Est
-	load_texture(cub, &cub->texture[3], "textures/south.xpm");  // Texture Ouest
+	load_texture(cub, &cub->texture[0], "textures/e.xpm"); // Texture Nord
+	load_texture(cub, &cub->texture[1], "textures/w.xpm"); // Texture Sud
+	load_texture(cub, &cub->texture[2], "textures/n.xpm");  // Texture Est
+	load_texture(cub, &cub->texture[3], "textures/s.xpm");  // Texture Ouest
 	cub->floor_color = 0x8B4513;
 	cub->ceiling_color = 0x7dff1a;
 }
